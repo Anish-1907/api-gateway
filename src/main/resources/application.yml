@@ -1,0 +1,22 @@
+server:
+  port: 8888
+ 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka 
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+      - id: BMSModule
+        uri: lb://bms
+        predicates:
+        - Path=/bms/**
+      - id: LMS
+        uri: lb://lms
+        predicates:
+        - Path=/loans/**
